@@ -1,25 +1,15 @@
-from datetime import datetime
 import sys
 import pathlib
 import openpyxl
 from openpyxl.utils import get_column_letter
+from datetime import datetime
 
+
+##  A python script that analyzes an excel file and generates a SQL statement to an existing DB.  
+##  The script should be called from a CLI with `EXCEL` file name as argument.
 
 def main(excel_file_name):
 ##  The main method of the script.
-##  The script should be called from a CLI with `EXCEL` file name as argument.
-##  The script generates an SQL statement from an excel file to an existing DB.
-##  Script assumptions:
-##  - The `EXCEL` file must be in the same directory as the script file.
-##  - The `EXCEL` file name, given to the script as argument should be without extension.
-##  - The `EXCEL` file should follow the company convention:
-##    * The file should have ONE sheet only.
-##    * The first row will be the columns titles.
-##    * The columns titles will match the DB columns titles.
-##    * The rows will start at [0,0] cell (top left).
-##    * Rest of the file rows will have appropriate type values.
-##    * The `email` column is set as PK in the company DB therefore duplicate `email` values are not allowed.
-##      The script will check for double `email` values, in case of double, the script will abort.
 
     dir_path = pathlib.Path(__file__).parent.absolute()
     slash = '\\'
@@ -37,7 +27,7 @@ aborting script!")
         sys.exit()
 
     sheet = workbook.worksheets[0]
-    ##pk_double_validation(sheet, "email")
+    pk_double_validation(sheet, "email")
 
     row_values_dictonary = {}
     num_of_cols = sheet.max_column
