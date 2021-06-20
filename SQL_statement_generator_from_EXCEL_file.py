@@ -92,9 +92,9 @@ def add_row_to_users_statement(users_sql_statement, row_values_dictonary):
 ## Returns a combined SQL statement of the statement and the row values.
 
     users_row = (f"      (\
-{row_values_dictonary['first_name']}, {row_values_dictonary['last_name']},\
- {row_values_dictonary['phone']}, {row_values_dictonary['email']},\
- {row_values_dictonary['membershp_start_date']}, {row_values_dictonary['club_id']}),\n")
+'{row_values_dictonary['first_name']}', '{row_values_dictonary['last_name']}',\
+ '{row_values_dictonary['phone']}', '{row_values_dictonary['email']}',\
+ '{row_values_dictonary['membershp_start_date']}', {row_values_dictonary['club_id']}),\n")
 
     users_sql_statement += users_row
     return users_sql_statement
@@ -104,8 +104,8 @@ def add_row_to_memberships_statement(memberships_sql_statement, row_values_dicto
 ## Returns a combined SQL statement of the statement and the row values using the PK title.
 
     memberships_row = (f"      (\
-SELECT id FROM users WHERE {pk_title}={row_values_dictonary[pk_title]};, {row_values_dictonary['membershp_start_date']},\
- {row_values_dictonary['membership_end_date']}, {row_values_dictonary['membership_name']}),\n")
+SELECT id FROM users WHERE {pk_title}={row_values_dictonary[pk_title]};, '{row_values_dictonary['membershp_start_date']}',\
+ '{row_values_dictonary['membership_end_date']}', '{row_values_dictonary['membership_name']}'),\n")
  
     memberships_sql_statement += memberships_row
     return memberships_sql_statement

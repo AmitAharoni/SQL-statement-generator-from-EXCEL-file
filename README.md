@@ -2,31 +2,34 @@
 
 
 # Description
-A python script that analyzes an excel file and generates a SQL statement to an existing DB.  
-The script should be called from a CLI with `EXCEL` file name as argument.
+ A python script that analyzes an excel file and generates a SQL statement for existing DB with multiple tables.  
 
 # ScreenShots
 ## INPUT: EXCEL file
-<img src="https://user-images.githubusercontent.com/58184521/122626269-4082c480-d0b2-11eb-89b0-c7b979c1637f.png" width="650">
+<img src="https://user-images.githubusercontent.com/58184521/122684862-b8670100-d210-11eb-98b2-ba824c81b68f.png" width="650">
 
-  ## OUTPUT: SQL statement
-<img src="https://user-images.githubusercontent.com/58184521/122626314-7aec6180-d0b2-11eb-9927-a44fa60629b2.png" width="650">
+ ## OUTPUT: SQL statement
+<img src="https://user-images.githubusercontent.com/58184521/122684876-d3397580-d210-11eb-9460-1a3d08c6a978.png" width="650">
 
-# Script's assumptions
-- The `EXCEL` will be in the same directory as the script file.
-- The `EXCEL` file name, will be given to the script as argument, will be given without extension.
-- The `EXCEL` file will follow the script's 'EXCEL' file conventions.
+# Script arguments
+The script should be called from a CLI interface with three arguments.
+1. `EXCEL` file path. 
+2. Club id.
+3. PK field title.
 
 # 'EXCEL' file conventions
 - The file should have ONE sheet only.
 - The first row will be the columns titles.
-- The columns titles will match the existing DB columns titles.
-- The rows will start at [0,0] cell (top left).
+- The columns titles will inclued entire pre-known list, in any order.  
+   [first_name, last_name,	email,	phone,	membershp_start_date,	membership_end_date,	membership_name].
+- The rows will start at ['A1'] cell (top left).
 - All the values types will match the DB columns types.
 
-# PK column
-- The `email` column is set as PK in the existing DB therefore duplicate `email` values are not allowed.
-- The script will check for double `email` values, in case of double, the script will notify and abort.
+# PK field column validation
+- One of [first_name, last_name, email,	phone] will be set as PK in the existing DB.
+- The PK column must exist in the file.
+- Duplicate PK values are not allowed in the file.
+- In any case of violation, the script will notify and abort.
 
 # Requirements
 
@@ -41,8 +44,7 @@ The script should be called from a CLI with `EXCEL` file name as argument.
    ```
 2. Open CLI (Command Line Interface).
 3. Navigate to the project directory.
-4. Place a valid `EXCEL` file in the directory.
-5. run the command
+4. run the command
      ```sh
-   python SQL_statement_generator_from_EXCEL_file.py <EXCEL FILE NAME>
+   python SQL_statement_generator_from_EXCEL_file.py <EXCEL FILE PATH> <CLUB ID> <PK FIELD TITLE>
    ```
